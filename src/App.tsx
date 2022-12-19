@@ -1,5 +1,11 @@
+import ColorPanel from "./components/ColorPanel";
+
 function App() {
-  return <div></div>;
+  return (
+    <div>
+      <ColorPanel />
+    </div>
+  );
 }
 
 export default App;
