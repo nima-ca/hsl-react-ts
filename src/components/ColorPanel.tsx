@@ -1,29 +1,72 @@
+import { HSLReducerActionType, useColor } from "../hooks/useColor";
 import styles from "./ColorPanel.module.scss";
 
 const ColorPanel = () => {
+  const { dispatch, state: HSLColor } = useColor();
   return (
     <div className={styles.colorPanel}>
-      <div className={styles.panel}></div>
+      <div
+        className={styles.panel}
+        style={{
+          backgroundColor: `hsl(${HSLColor.hue} ${HSLColor.saturation}% ${HSLColor.lightness}%)`,
+        }}
+      ></div>
       <div className={styles.controls}>
         <div>
-          <p>hue: {10}</p>
+          <p>hue: {HSLColor.hue}</p>
           <div>
-            <button>+</button>
-            <button>-</button>
+            <button
+              onClick={(e) =>
+                dispatch({ type: HSLReducerActionType.incrementHue })
+              }
+            >
+              +
+            </button>
+            <button
+              onClick={(e) =>
+                dispatch({ type: HSLReducerActionType.decrementHue })
+              }
+            >
+              -
+            </button>
           </div>
         </div>
         <div>
-          <p>saturation: {10}</p>
+          <p>saturation: {HSLColor.saturation}</p>
           <div>
-            <button>+</button>
-            <button>-</button>
+            <button
+              onClick={(e) =>
+                dispatch({ type: HSLReducerActionType.incrementSaturaion })
+              }
+            >
+              +
+            </button>
+            <button
+              onClick={(e) =>
+                dispatch({ type: HSLReducerActionType.decrementSaturaion })
+              }
+            >
+              -
+            </button>
           </div>
         </div>
         <div>
-          <p>lightness: {10}</p>
+          <p>lightness: {HSLColor.lightness}</p>
           <div>
-            <button>+</button>
-            <button>-</button>
+            <button
+              onClick={(e) =>
+                dispatch({ type: HSLReducerActionType.incrementLightness })
+              }
+            >
+              +
+            </button>
+            <button
+              onClick={(e) =>
+                dispatch({ type: HSLReducerActionType.decrementLightness })
+              }
+            >
+              -
+            </button>
           </div>
         </div>
       </div>
