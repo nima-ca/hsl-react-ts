@@ -1,4 +1,4 @@
-import ColorPanel from "./components/ColorPanel";
+import { ColorPanel } from "./components/ColorPanel";
 
 function App() {
   return (

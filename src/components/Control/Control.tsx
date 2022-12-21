@@ -19,7 +19,7 @@ export const Control = ({
   const { dispatch, state: HSLColor } = useContext(colorContext);
   return (
     <div className={styles.control}>
-      <p>
+      <p data-testid="element-title">
         {title}: {HSLColor[title as keyof HSLReducerState]}
       </p>
       <div>

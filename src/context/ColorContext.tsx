@@ -17,8 +17,8 @@ export enum HSLReducerActionType {
   incrementHue = "INCREMENT_HUE",
   decrementHue = "DECREMENT_HUE",
 
-  incrementSaturaion = "INCREMENT_SATURATION",
-  decrementSaturaion = "DECREMENT_SATURATION",
+  incrementSaturation = "INCREMENT_SATURATION",
+  decrementSaturation = "DECREMENT_SATURATION",
 
   incrementLightness = "INCREMENT_LIGHTNESS",
   decrementLightness = "DECREMENT_LIGHTNESS",
@@ -44,13 +44,13 @@ const HSLReducer = (
       hue: state.hue === 0 ? 360 : --state.hue,
     };
   }
-  if (type === HSLReducerActionType.incrementSaturaion) {
+  if (type === HSLReducerActionType.incrementSaturation) {
     return {
       ...state,
       saturation: state.saturation === 100 ? 0 : ++state.saturation,
     };
   }
-  if (type === HSLReducerActionType.decrementSaturaion) {
+  if (type === HSLReducerActionType.decrementSaturation) {
     return {
       ...state,
       saturation: state.saturation === 0 ? 100 : --state.saturation,
