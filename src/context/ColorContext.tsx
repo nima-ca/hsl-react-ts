@@ -1,3 +1,4 @@
+import React, { createContext } from "react";
 import { useReducer } from "react";
 
 export type HSLReducerState = {
@@ -6,10 +7,10 @@ export type HSLReducerState = {
   lightness: number;
 };
 
-const initialState: HSLReducerState = {
-  hue: 0,
-  lightness: 0,
-  saturation: 0,
+export const initialState: HSLReducerState = {
+  hue: 50,
+  lightness: 50,
+  saturation: 90,
 };
 
 export enum HSLReducerActionType {
@@ -34,42 +35,60 @@ const HSLReducer = (
   if (type === HSLReducerActionType.incrementHue) {
     return {
       ...state,
-      hue: state.hue === 360 ? 0 : state.hue++,
+      hue: state.hue === 360 ? 0 : ++state.hue,
     };
   }
   if (type === HSLReducerActionType.decrementHue) {
     return {
       ...state,
-      hue: state.hue === 0 ? 360 : state.hue--,
+      hue: state.hue === 0 ? 360 : --state.hue,
     };
   }
   if (type === HSLReducerActionType.incrementSaturaion) {
     return {
       ...state,
-      saturation: state.saturation === 100 ? 0 : state.saturation++,
+      saturation: state.saturation === 100 ? 0 : ++state.saturation,
     };
   }
   if (type === HSLReducerActionType.decrementSaturaion) {
     return {
       ...state,
-      saturation: state.saturation === 0 ? 100 : state.saturation--,
+      saturation: state.saturation === 0 ? 100 : --state.saturation,
     };
   }
   if (type === HSLReducerActionType.incrementLightness) {
     return {
       ...state,
-      lightness: state.lightness === 100 ? 0 : state.lightness++,
+      lightness: state.lightness === 100 ? 0 : ++state.lightness,
     };
   }
   if (type === HSLReducerActionType.decrementLightness) {
     return {
       ...state,
-      lightness: state.lightness === 0 ? 100 : state.lightness--,
+      lightness: state.lightness === 0 ? 100 : --state.lightness,
     };
   }
   return state;
 };
-export const useColor = () => {
+
+export const colorContext = createContext<{
+  state: HSLReducerState;
+  dispatch: React.Dispatch<HSLReducerAction>;
+}>({
+  state: initialState,
+  dispatch: () => null,
+});
+
+export const ColorProvider = (props: any) => {
   const [state, dispatch] = useReducer(HSLReducer, initialState);
-  return { state, dispatch };
+  return (
+    <colorContext.Provider
+      value={{
+        state,
+        dispatch,
+      }}
+    >
+      {props.children}
+    </colorContext.Provider>
+  );
 };
